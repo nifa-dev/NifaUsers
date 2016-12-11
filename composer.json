@@ -1,0 +1,20 @@
+{
+    "name": "nifa-dev/NifaUsers",
+    "description": "Base Users Classes for NIFA Applications",
+    "type": "cakephp-plugin",
+    "keywords": ["cakephp"],
+    "homepage": "",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jared Testa",
+            "homepage": "",
+            "role": "Author"
+        }
+    ],
+    "autoload": {
+    "psr-4": {
+        "NifaUsers\\": "src"
+    }
+}
+}
