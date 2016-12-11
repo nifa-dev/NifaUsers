@@ -1,5 +1,5 @@
 {
-    "name": "nifa-dev/NifaUsers",
+    "name": "nifa-dev/nifausers",
     "description": "Base Users Classes for NIFA Applications",
     "type": "cakephp-plugin",
     "keywords": ["cakephp"],
