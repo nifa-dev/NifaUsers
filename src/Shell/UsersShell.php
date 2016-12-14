@@ -27,6 +27,17 @@ class UsersShell extends Shell
         }
     }
 
+    public function addSuperuser($email) {
+        $user = ['email' => $email, 'role_id' => 1, 'active' => true];
+
+        $user = $this->Users->newEntity($user);
+        if($user = $this->Users->save($user)) {
+            $this->out(sprintf("The user %s was created.", $user->email));
+        } else {
+            $this->out("Failed to create user");
+        }
+    }
+
 
 
 
