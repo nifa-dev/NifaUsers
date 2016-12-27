@@ -6,7 +6,7 @@
     "homepage": "",
     "license": "MIT",
     "require": {
-        "nifa-dev/permissions":"dev-master"
+        "nifa-dev/permissions":"^1.0.0"
     },
     "authors": [
         {
