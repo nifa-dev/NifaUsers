@@ -16,8 +16,13 @@ class User extends Entity
     protected $_virtual = ['groups'];
 
     protected function _getGroups() {
-        //return $this->_properties['wp_groups'];
-        return json_decode($this->_properties['wp_groups'], true);
+        
+        if(array_key_exists('wp_groups', $this->_properties)) {
+            return json_decode($this->_properties['wp_groups'], true);
+        } else {
+            return null;
+        }
+
     }
 
 }
