@@ -11,7 +11,7 @@ class UsersShell extends Shell
     public function initialize()
     {
         parent::initialize();
-        $this->loadModel('Users');
+        $this->loadModel('NifaUsers.Users');
 
     }
 
