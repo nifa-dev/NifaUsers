@@ -35,20 +35,5 @@ class User extends Entity
         'okta_user_id' => true,
         'okta_user' => true
     ];
-<<<<<<< Updated upstream
 
-    protected $_virtual = ['groups'];
-
-    protected function _getGroups() {
-        
-        if(array_key_exists('wp_groups', $this->_properties)) {
-            return json_decode($this->_properties['wp_groups'], true);
-        } else {
-            return null;
-        }
-
-    }
-
-=======
->>>>>>> Stashed changes
 }
