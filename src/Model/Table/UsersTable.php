@@ -6,8 +6,21 @@ use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
-
-
+/**
+ * Users Model
+ *
+ * @property \NifaUsers\Model\Table\NifaUsersTable|\Cake\ORM\Association\BelongsTo $NifaUsers
+ *
+ * @method \NifaUsers\Model\Entity\User get($primaryKey, $options = [])
+ * @method \NifaUsers\Model\Entity\User newEntity($data = null, array $options = [])
+ * @method \NifaUsers\Model\Entity\User[] newEntities(array $data, array $options = [])
+ * @method \NifaUsers\Model\Entity\User|bool save(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \NifaUsers\Model\Entity\User patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
+ * @method \NifaUsers\Model\Entity\User[] patchEntities($entities, array $data, array $options = [])
+ * @method \NifaUsers\Model\Entity\User findOrCreate($search, callable $callback = null, $options = [])
+ *
+ * @mixin \Cake\ORM\Behavior\TimestampBehavior
+ */
 class UsersTable extends Table
 {
 
@@ -21,17 +34,11 @@ class UsersTable extends Table
     {
         parent::initialize($config);
 
-        $this->table('users');
-        $this->displayField('email');
-        $this->primaryKey('id');
+        $this->setTable('users');
+        $this->setDisplayField('name');
+        $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
-
-        $this->belongsTo('Roles', [
-
-            'className' => 'Permissions.Roles'
-        ]);
-
 
     }
 
@@ -41,63 +48,23 @@ class UsersTable extends Table
      * @param \Cake\Validation\Validator $validator Validator instance.
      * @return \Cake\Validation\Validator
      */
-    /*public function validationDefault(Validator $validator)
+    public function validationDefault(Validator $validator)
     {
-        $validator
+        /*$validator
             ->uuid('id')
             ->allowEmpty('id', 'create');
 
         $validator
-            ->requirePresence('username', 'create')
-            ->notEmpty('username');
+            ->scalar('name')
+            ->allowEmpty('name');
 
         $validator
             ->email('email')
-            ->allowEmpty('email');
-
-        $validator
-            ->requirePresence('password', 'create')
-            ->notEmpty('password');
-
-        $validator
-            ->allowEmpty('first_name');
-
-        $validator
-            ->allowEmpty('last_name');
-
-        $validator
-            ->allowEmpty('token');
-
-        $validator
-            ->dateTime('token_expires')
-            ->allowEmpty('token_expires');
-
-        $validator
-            ->allowEmpty('api_token');
-
-        $validator
-            ->dateTime('activation_date')
-            ->allowEmpty('activation_date');
-
-        $validator
-            ->dateTime('tos_date')
-            ->allowEmpty('tos_date');
-
-        $validator
-            ->boolean('active')
-            ->requirePresence('active', 'create')
-            ->notEmpty('active');
-
-        $validator
-            ->boolean('is_superuser')
-            ->requirePresence('is_superuser', 'create')
-            ->notEmpty('is_superuser');
-
-        $validator
-            ->allowEmpty('role');
+            ->requirePresence('email', 'create')
+            ->notEmpty('email');*/
 
         return $validator;
-    }*/
+    }
 
     /**
      * Returns a rules checker object that will be used for validating
@@ -108,29 +75,8 @@ class UsersTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        //$rules->add($rules->isUnique(['username']));
         $rules->add($rules->isUnique(['email']));
 
         return $rules;
-    }
-
-    public function convertWpToCakeUser($wpUser, $new = true) {
-        $data = [];
-        $data['email'] = $wpUser->user_email;
-        $data['active'] = 1;
-        if($new) {
-            $data['is_superuser'] = 0;
-            $data['role'] = "user";
-        }
-
-        $data['wp_groups'] = json_encode($wpUser->groups);
-        $data['nifaaero_id'] = $wpUser->ID;
-        return $data;
-    }
-
-    public function getUserGroups($id) {
-        $user = $this->get($id);
-        return $user->groups;
-        //return json_encode($user->wp_groups);
     }
 }

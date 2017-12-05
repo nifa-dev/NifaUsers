@@ -6,7 +6,9 @@
     "homepage": "",
     "license": "MIT",
     "require": {
-        "nifa-dev/permissions":"^1.0.0"
+        "nifa-dev/permissions":"^1.0.0",
+        "spomky-labs/jose": "^7.0",
+        "fproject/php-jwt": "^4.0"
     },
     "authors": [
         {
@@ -18,6 +20,13 @@
     "autoload": {
     "psr-4": {
         "NifaUsers\\": "src"
-    }
+    },
+      "autoload-dev": {
+        "psr-4": {
+          "NifaUsers\\Test\\": "tests",
+          "NifaUsers\\TestApp\\": "tests/test_app/src", // < here we go
+          "Cake\\Test\\": "./vendor/cakephp/cakephp/tests"
+        }
+      }
 }
 }
