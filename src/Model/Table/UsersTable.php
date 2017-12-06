@@ -1,10 +1,13 @@
 <?php
 namespace NifaUsers\Model\Table;
 
+use Cake\Datasource\EntityInterface;
+use Cake\Event\Event;
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
+use Cake\Log\Log;
 
 /**
  * Users Model
@@ -78,5 +81,20 @@ class UsersTable extends Table
         $rules->add($rules->isUnique(['email']));
 
         return $rules;
+    }
+
+
+
+    public function createUser($email, $okta_user_id, $name, $role_id = 2, $active = true)
+    {
+        $user = $this->newEntity();
+        $user->email = $email;
+        $user->okta_user_id = $okta_user_id;
+        $user->name = $name;
+        $user->role_id = $role_id;
+        $user->active = $active;
+        $user->nifaaero_id = 0;
+        Log::write('debug', $user);
+        return $this->save($user);
     }
 }
