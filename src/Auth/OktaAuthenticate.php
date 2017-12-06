@@ -81,7 +81,7 @@ class OktaAuthenticate extends BaseAuthenticate
 
         //find local user if exists, or create local user if doesn't exist
         //find by okta user id
-        $users = TableRegistry::get('OktaAuth.Users');
+        $users = TableRegistry::get('NifaUsers.Users');
 
         $idTokenDecoded = JWT::decode($responseData->id_token, $keys, ['RS256']);
         Log::write('debug', $idTokenDecoded);
@@ -105,13 +105,7 @@ class OktaAuthenticate extends BaseAuthenticate
         }
 
         //user doesn't exist in the application, we'll create the user
-        $newData = ['okta_user_id' => $decoded->uid, 'email' => $idTokenDecoded->email, 'name' => $idTokenDecoded->name];
-        $user = $users->newEntity($newData);
-        if($user = $users->save($user)) {
-            return $user;
-        }
-
-        return false;
+        return $users->createUser($idTokenDecoded->email, $decoded->uid, $idTokenDecoded->name);
 
     }
 }
