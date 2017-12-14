@@ -1,7 +1,7 @@
 <?php
 use Migrations\AbstractMigration;
 
-class AddNifaaeroIdToUsers extends AbstractMigration
+class AddOktaUserIdToUsers extends AbstractMigration
 {
     /**
      * Change Method.
@@ -13,10 +13,10 @@ class AddNifaaeroIdToUsers extends AbstractMigration
     public function change()
     {
         $table = $this->table('users');
-        $table->addColumn('nifaaero_id', 'integer', [
+        $table->addColumn('okta_user_id', 'string', [
             'default' => null,
-            'limit' => 11,
-            'null' => false,
+            'limit' => 64,
+            'null' => true,
         ]);
         $table->update();
     }
