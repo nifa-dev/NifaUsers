@@ -33,7 +33,8 @@ class User extends Entity
         'created' => true,
         'modified' => true,
         'okta_user_id' => true,
-        'okta_user' => true
+        'active' => true,
+        'role_id' => true
     ];
 
 }

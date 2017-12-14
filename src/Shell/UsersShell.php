@@ -17,7 +17,7 @@ class UsersShell extends Shell
 
     public function createFirstUser($email, $roleId) {
 
-        $user = ['email' => $email, 'role_id' => $roleId, 'active' => true, 'nifaaero_id' => 0];
+        $user = ['email' => $email, 'role_id' => $roleId, 'active' => true, 'okta_user_id' => null];
 
         $user = $this->Users->newEntity($user);
         if($user = $this->Users->save($user)) {
